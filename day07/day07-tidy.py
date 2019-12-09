@@ -7,9 +7,9 @@ prog = [int(x) for x in csv[0]]
 outs = []
 
 import itertools
-for a,b,c,d,e in itertools.permutations([0,1,2,3,4]):
+for perm in itertools.permutations([0,1,2,3,4]):
     val = 0
-    for x in a,b,c,d,e:
+    for x in perm:
         m = intcode.machine(prog)
         m.put(x)
         m.put(val)
@@ -19,9 +19,9 @@ for a,b,c,d,e in itertools.permutations([0,1,2,3,4]):
 print(max(outs))
 
 outs = []
-for a,b,c,d,e in itertools.permutations([5,6,7,8,9]):
+for perm in itertools.permutations([5,6,7,8,9]):
     amps = [intcode.machine(prog) for x in range(5)]
-    for amp,inp in zip(amps,[a,b,c,d,e]): amp.put(inp)
+    for amp,inp in zip(amps,perm): amp.put(inp)
     amps[0].put(0)
     while not all(x.halted for x in amps):
         for amp in amps: amp.run()

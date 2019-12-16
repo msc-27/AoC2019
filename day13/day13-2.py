@@ -16,8 +16,8 @@ def process_output():
     z = m.get()
     while x != None:
         if x == -1: score = z
-        if z == 3: pad = x
-        if z == 4: bal = x
+        if x != -1 and z == 3: pad = x
+        if x != -1 and z == 4: bal = x
         x = m.get()
         y = m.get()
         z = m.get()

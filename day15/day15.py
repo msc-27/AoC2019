@@ -32,7 +32,6 @@ def explore(p): # Find exits from location p
                 target = (nx,ny)
     return rv
 
-import astar
 a = astar.astar((0,0),explore)
 states = a.run(None) # Explore fully and find target
 print([s[1] for s in states if s[0] == target][0])

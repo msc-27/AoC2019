@@ -35,8 +35,9 @@ def explore(p): # Find exits from location p
 import astar
 a = astar.astar((0,0),explore)
 states = a.run(None) # Explore fully and find target
-Map = [x[0] for x in states]
+print([s[1] for s in states if s[0] == target][0])
 
+Map = [x[0] for x in states]
 def trans(p): # Quicker transition function now we have the map
     rv = []
     x,y = p
@@ -45,10 +46,6 @@ def trans(p): # Quicker transition function now we have the map
     if (x+1,y) in Map: rv.append(((x+1,y),1))
     if (x-1,y) in Map: rv.append(((x-1,y),1))
     return rv
-
-a = astar.astar((0,0),trans)
-solution = a.run(target) # Find path to target
-print(solution[0])
 
 a = astar.astar(target,trans) # Part 2: target is now the initial state
 solution = a.run(None) # Explore fully and get costs for all locations

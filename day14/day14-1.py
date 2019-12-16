@@ -26,6 +26,7 @@ while req:
     in_hand = min(qty, surplus[chem])
     surplus[chem] -= in_hand
     qty -= in_hand
+    if qty == 0: continue
     bq, srcs = bom[chem]
     mult = qty / bq
     if mult != int(mult): mult += 1

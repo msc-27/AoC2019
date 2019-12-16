@@ -2,8 +2,7 @@ from collections import defaultdict
 class machine:
     _ops = dict()
     def __init__(self, values):
-        self.mem = defaultdict(int)
-        for i in range(len(values)): self.mem[i] = values[i] 
+        self.mem = defaultdict(int,enumerate(values))
         self.ip = 0
         self.rb = 0
         self.halted = False
@@ -13,7 +12,8 @@ class machine:
         self.debug = False
         self.pause_on_output = False
     def copy(self):
-        m = machine(self.mem)
+        m = machine([])
+        m.mem = self.mem.copy()
         m.ip = self.ip
         m.rb = self.rb
         m.halted = self.halted

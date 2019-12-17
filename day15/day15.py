@@ -1,5 +1,6 @@
 import intcode
 import astar
+import copy
 with open('input') as f:
     lines = [x.strip() for x in f]
 csv = [x.split(',') for x in lines]
@@ -24,8 +25,8 @@ def explore(p): # Find exits from location p
             nx = x + move[direction][0]
             ny = y + move[direction][1]
             rv.append(((nx,ny),1))
-            maze[(nx,ny)] = m.copy() # Clone the 'droid and leave it behind
-            m.put(reverse) # Move the 'droid back whence it came
+            maze[(nx,ny)] = copy.deepcopy(m) # Clone the 'droid
+            m.put(reverse) # Move the original 'droid back whence it came
             m.run()
             _ = m.get()
             if r == 2:

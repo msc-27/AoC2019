@@ -11,18 +11,6 @@ class machine:
         self._outputs = []
         self.debug = False
         self.pause_on_output = False
-    def copy(self):
-        m = machine([])
-        m.mem = self.mem.copy()
-        m.ip = self.ip
-        m.rb = self.rb
-        m.halted = self.halted
-        m.blocked = self.blocked
-        m._inputs = self._inputs.copy()
-        m._outputs = self._outputs.copy()
-        m.debug = self.debug
-        m.pause_on_output = self.pause_on_output
-        return m
     def get(self):
         return self._outputs.pop(0) if self._outputs else None
     def put(self, x):

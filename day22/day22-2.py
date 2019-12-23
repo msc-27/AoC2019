@@ -2,19 +2,7 @@ with open('input') as f:
     lines = [x.strip('\n') for x in f]
 ssv = [x.split(' ') for x in lines]
 
-# Bring in some code for arithmetic mod p
-# Begin code lifted from the Internet
-def egcd(a,b):
-    if a == 0:
-        return (b,0,1)
-    else:
-        g,y,x = egcd(b%a,a)
-        return (g,x-(b//a)*y,y)
-def modinv(a,m):
-    g,x,y = egcd(a,m)
-    return x%m
-# End code lifted from the Internet
-
+# Code for arithmetic mod p
 def modexp(a,b,p): # Calculate a^b mod p
     r = 1
     power = a
@@ -23,6 +11,10 @@ def modexp(a,b,p): # Calculate a^b mod p
         power = (power * power) % p
         b //= 2
     return r
+
+# Fermat's Little Theorem: a^(p-1) ≡ 1 (mod p)
+# Therefore a . a^(p-2) ≡ 1 (mod p)
+def modinv(a,p): return modexp(a,p-2,p)
 
 p = 119315717514047 # deck size (assumed prime)
 N = 101741582076661 # number of shuffles
@@ -69,7 +61,7 @@ def revshuf(pos):
 # So let's do this!
 
 d = revshuf(0)
-C = revshuf(1) - d
+C = (revshuf(1) - d) % p
 s = (modinv(C-1,p) * (modexp(C,N,p) - 1)) % p
 
 term1 = (modexp(C,N,p) * 2020) % p

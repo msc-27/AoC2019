@@ -16,7 +16,7 @@ for line in f:
     while v != None:
         msg += chr(v)
         v = m.get()
-print(msg)
+    print(msg)
 items = ['monolith','weather machine','mutex','hologram','polygon','jam','semiconductor','prime number']
 import itertools
 for i in range(1,9):
